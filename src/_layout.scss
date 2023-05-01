@@ -194,7 +194,7 @@ $scaleRatio: 1.61803398875 !default; // Golden ratio
     box-sizing: content-box;
     margin: auto;
     margin-inline: auto;
-    max-inline-size: var(line-length);
+    max-inline-size: var(--line-length);
 
     // Ensure a minimum size on smaller screens, where the margins do not appear.
     padding-left: var(--unit-1);

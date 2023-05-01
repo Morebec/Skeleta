@@ -42,4 +42,4 @@ jobs:
       - name: Commit Changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Build library assets"
+          commit_message: "ci: build library assets"

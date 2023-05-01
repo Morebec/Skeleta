@@ -1,0 +1,37 @@
+{
+  "name": "@skeleta/css",
+  "version": "0.0.1",
+  "description": "Skeleta is a lightweight CSS library that provides a flexible skeleton for ",
+  "keywords": [
+    "responsive",
+    "layouts.",
+    "css",
+    "sass",
+    "mobile-first",
+    "frontend"
+  ],
+  "author": "jwillp <jwilliam.perreault@morebec.com>",
+  "homepage": "https://github.com/Morebec/Skeleta",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morebec/Skeleta.git"
+  },
+  "scripts": {
+    "build": "gulp build",  
+    "watch": "gulp watch"
+  },
+  "bugs": {
+    "url": "https://github.com/Morebec/Skeleta/issues"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "normalize.css": "^8.0.1",
+    "sass": "^1.62.0"
+  }
+}

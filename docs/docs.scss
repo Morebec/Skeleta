@@ -1,0 +1,67 @@
+@import "../src/skeleta";
+
+body {
+    font-family: 'Ubuntu', arial, sans-serif;
+    color: rgb(17 24 39);
+    padding: var(--unit2);
+}
+
+.card {
+    @extend .box;
+    @extend .box--padding2;
+
+    @extend .stack;
+    @extend .stack--gap0;
+
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: var(--unit0);
+}
+
+.text-title {
+    background-color: rgba(160,174,192);
+    color: transparent;
+    border-radius: var(--unit0);
+    font-size: var(--unit1);
+}
+
+.text-line {
+    background-color: #e2e8f0;
+    color: transparent;
+    border-radius: var(--unit0);
+    display: block;
+}
+
+button {
+    @extend .box;
+    @extend .box--max-width6;
+
+    color: transparent;
+    border-radius: var(--unit0);
+    padding:  var(--unit-2);
+    border:  none;
+
+    &.button--primary {
+        background-color: rgb(30 66 159);
+    }
+
+    &.button--secondary {
+        background-color: rgb(200 66 0);
+    }
+}
+
+code {
+    background-color: lightgrey;
+    border-radius: var(--unit-2);
+    padding: 0 var(--unit-2);
+}
+
+.example {
+    @extend .box;
+    @extend .box--padding-h2;
+    @extend .box--padding-v1;
+
+
+    border: 1px solid rgba(160,174,192);
+    overflow: scroll;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

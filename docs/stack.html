@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stack</title>
+    <link rel="stylesheet" type="text/css" href="../dist/docs.min.css">
+</head>
+<body>
+<h1>Stack</h2>
+<div class="example">
+  <div class="stack">
+      <div class="card">
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <button class="button--primary">subscribe now</button>
+      </div>
+
+      <div class="card">
+        <span class="text-line">a line of text</span>
+        <span class="text-line">a line of text</span>
+        <button class="button--secondary">subscribe now</button>
+      </div>
+      <div class="card">
+        <span class="text-line">a line of text</span>
+        <span class="text-line">a line of text</span>
+        <button class="button--primary">subscribe now</button>
+      </div>
+  </div>
+</div>
+
+
+
+<h2>Stack with <code>gap0</code></h2>
+<div class="example">
+  <div class="stack stack--gap0">
+      <div class="card">
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <button class="button--primary">subscribe now</button>
+      </div>
+
+      <div class="card">
+        <span class="text-line">a line of text</span>
+        <span class="text-line">a line of text</span>
+        <button class="button--secondary">subscribe now</button>
+      </div>
+      <div class="card">
+        <span class="text-line">a line of text</span>
+        <span class="text-line">a line of text</span>
+        <button class="button--primary">subscribe now</button>
+      </div>
+  </div>
+</div>
+
+<h2>Stack with split</h2>
+<div class="example">
+  <div class="columns columns--expand columns--gap2">
+    <div class="stack stack--gap1">
+        <div class="card">
+            <span class="text-line">a line of text</span>
+            <span class="text-line">a line of text</span>
+            <span class="text-line">a line of text</span>
+            <button class="button--primary">subscribe now</button>
+        </div>
+
+        <div class="card">
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <button class="button--primary">subscribe now</button>
+        </div>
+        <div class="card">
+          <span class="text-line">a line of text</span>
+          <span class="text-line">a line of text</span>
+          <button class="button--secondary">subscribe now</button>
+        </div>
+    </div>
+    <div class="card stack">
+        <div class="stack__split"></div>
+      <span class="text-line">a line of text</span>
+      <span class="text-line">a line of text</span>
+        <div class="cluster cluster--justify-end">
+          <button class="button--secondary">subscribe now</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

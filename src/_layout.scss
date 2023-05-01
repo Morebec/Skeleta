@@ -1,0 +1,325 @@
+// This file contains all the layout utility classes of skeleta.
+
+// base font-size
+$fontSize: 16px;
+
+// Defines the longest comfortably readable length of content.
+// This property is used by different components to establish max-width properties
+// and responsiveness.
+$lineLength: 120ch !default;
+
+
+/**
+ *  UNIT SCALE
+ * The unit scale defines a list of values that can be used for padding, margin and sizes for an harmonious
+ * and consistent design. Its increments are based on a modular scale.
+ * It contains a main size (based on the current font-size) known as unit0 and increases for n levels (maxUnitScaleValue)
+ * It also decreases below the unit0 for n levels (minUnitScaleValue)
+ **/
+$minUnitScaleValue: -5 !default;
+$maxUnitScaleValue: 10 !default;
+$scaleRatio: 1.61803398875 !default; // Golden ratio
+
+:root {
+    --#{$prefix}font-size: #{$fontSize};
+    --#{$prefix}line-length: #{$lineLength};
+
+    // UNIT SCALE
+    --#{$prefix}ratio: #{$scaleRatio}; 
+
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        @if $i < 0 {
+            --#{$prefix}unit#{$i}: calc(var(--unit#{$i + 1}) / var(--ratio));
+        } @else if $i > 0 {
+            --#{$prefix}unit#{$i}: calc(var(--unit#{$i - 1}) * var(--ratio));
+        } @else {
+            --#{$prefix}unit0: 1rem;
+        }
+    }
+}
+
+
+/**
+ * Box is the most basic container, and simply defines an element
+ * as being a box. This can be useful to easily add padding to 
+ * block type elements.
+ **/
+.#{$prefix}box {
+    display: block;
+    min-width: var(--unit0);
+
+    // GAP
+
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        // padding
+        &.#{$prefix}box--padding#{$i} {
+            padding: var(--unit#{$i});
+        }
+        
+        // padding horizontal (left-right)
+        &.#{$prefix}box--padding-h#{$i} {
+            padding-left: var(--unit#{$i});
+            padding-right: var(--unit#{$i});
+        }
+
+        // padding vertical (top-bottom)
+        &.#{$prefix}box--padding-v#{$i} {
+            padding-top: var(--unit#{$i});
+            padding-bottom: var(--unit#{$i});
+        }
+
+        // width
+        &.#{$prefix}box--width#{$i} {
+            width: var(--unit#{$i});
+        }
+        &.#{$prefix}box--max-width#{$i} {
+            max-width: var(--unit#{$i});
+        }
+        &.#{$prefix}box--min-width#{$i} {
+            min-width: var(--unit#{$i});
+        }
+
+        // height
+        &.#{$prefix}box--height#{$i} {
+            height: var(--unit#{$i});
+        }
+        &.#{$prefix}box--max-height#{$i} {
+            max-height: var(--unit#{$i});
+        }
+        &.#{$prefix}box--min-height#{$i} {
+            min-height: var(--unit#{$i});
+        }
+    }
+}
+
+
+/**
+ * The stack groups its nested elements vertically.
+ * Modifiers:
+ *  - `gap`: adds spacing between nested elements.
+ *  - `justify`: adds
+ */
+.#{$prefix}stack {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    &:only-child {
+        height: 100%;
+    }
+
+
+    // GAP
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}stack--gap#{$i} {
+            gap: var(--unit#{$i});
+        }
+    }
+
+    
+    // JUSTIFY
+    @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
+        &.#{$prefix}stack--justify-#{$i} {
+            justify-content: #{$i};
+        }
+    }
+
+    // SPLIT
+    .#{$prefix}stack__split + * {
+        margin-top: auto;
+    }
+}
+
+
+/**
+ * Columns displays child elements as columns.
+ * Responsiveness: 
+ *     It does not wrap the elements, and maintains the two column structure.
+ **/
+.#{$prefix}columns {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+
+    &.#{$prefix}columns--expand > * {
+        flex-grow: 1;
+    }
+
+
+    // GAP
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}columns--gap#{$i} {
+            gap: calc(var(--unit#{$i}) / 2);
+        }
+    }
+
+    
+
+    // JUSTIFY
+    @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
+        &.#{$prefix}columns--justify-#{$i} {
+            justify-content: #{$i};
+        }
+    }
+
+    // ALIGN
+     @each $i in 'stretch', 'start', 'end', 'center' {
+         &.#{$prefix}columns--align-#{$i} {
+             align-items: #{$i};
+         }
+     }
+
+
+     // SPLIT
+     .#{$prefix}columns__split {
+        flex-grow: 1;
+
+        & + * {
+           margin-left: auto;
+        }
+    }
+}
+
+/**
+ * Center simply centers itself within its parent both vertically and horizontally.
+ * Modifier:
+ *  - `content-centered`: Centers its nested element within the `center` element.
+ * 
+ * In CSS to center a div, it must have a width.
+ * In the case here, the width is calculated using the --line-length property, 
+ * which corresponds to the maximum width in `ch`that some content can take.
+ */
+.#{$prefix}center {
+    display: block;
+    
+    box-sizing: content-box;
+    margin: auto;
+    margin-inline: auto;
+    max-inline-size: var(line-length);
+
+    // Ensure a minimum size on smaller screens, where the margins do not appear.
+    padding-left: var(--unit-1);
+    padding-right: var(--unit-1);
+
+    &.#{$prefix}center--content-centered {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/**
+ * The Cluster aligns elements horizontally that differ in length in a row and wraps
+ * them when needed.
+ * Modifiers:
+ *  - `gap`: adds spacing between elements.
+ * Responsiveness:
+ *     Wraps elements vertically.
+ */
+.#{$prefix}cluster {
+    display: flex;
+    flex-wrap: wrap;
+    
+    // GAP
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}cluster--gap#{$i} {
+            gap: var(--unit#{$i});
+        }
+    }
+
+    // JUSTIFY
+    @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
+         &.#{$prefix}cluster--justify-#{$i} {
+            justify-content: #{$i};
+        }
+    }
+}
+
+
+/**
+ * The grid lays out its nested elements side by side and wraps them into rows when they overflow.
+ * The grid has a limitation that requires to define the minimum width so
+ * that it can know when to wrap elements, which is controlled by the `grid-template-colums`
+ * property using the value `repeat(auto-fit, minmax(min(min-wdith, 100%), 1fr))`.
+ * 
+ **/
+.#{$prefix}grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--unit5), 100%), 1fr));
+
+    // Min-width
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}grid--min-width#{$i} {
+            grid-template-columns: repeat(auto-fit, minmax(min(var(--unit#{$i}), 100%), 1fr));
+        }
+    }
+
+    // GAP
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}grid--gap#{$i} {
+            grid-gap: calc(var(--unit#{$i}) / 2) ;
+        }
+    }
+
+
+    & > * {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 30ch;
+    }
+
+     // SPLIT
+     .#{$prefix}grid__split {
+        & + * {
+           margin-left: auto;
+        }
+        flex-grow: 1;
+    }
+}
+
+
+/**
+ * The switcher lays out its nested elements side by side and wraps them when 
+ * they overflow. As opposed to the Cluster, when they wrap they will take the 
+ * full space available horizontally.
+ **/
+.#{$prefix}switcher {
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
+    &.#{$prefix}switcher--expand > * {
+        flex-grow: 1;
+        height: 100%;
+    }
+
+    // JUSTIFY
+    @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
+         &.#{$prefix}switcher--justify-#{$i} {
+            justify-content: #{$i};
+        }
+    }
+
+    // ALIGN
+     @each $i in 'stretch', 'start', 'end', 'center' {
+         &.#{$prefix}switcher--align-#{$i} {
+             align-items: #{$i};
+         }
+     }
+
+
+    // GAP
+    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
+        &.#{$prefix}switcher--gap#{$i} {
+            gap: calc(var(--unit#{$i}) / 2);
+        }
+    }
+
+     // SPLIT
+     .#{$prefix}switcher__split {
+        & + * {
+           margin-left: auto;
+        }
+        flex-grow: 1;
+    }
+}

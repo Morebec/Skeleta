@@ -1,0 +1,45 @@
+name: "build"
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build Library
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Library
+        run: npm run build
+
+      - name: Check built CSS files for Sass variables
+        shell: bash
+        run: |
+          SASS_VARS_FOUND=$(find "dist/" -type f -name "*.css" -print0 | xargs -0 --no-run-if-empty grep -F "\$" || true)
+          if [[ -z "$SASS_VARS_FOUND" ]]; then
+            echo "All good, no Sass variables found!"
+            exit 0
+          else
+            echo "Found $(echo "$SASS_VARS_FOUND" | wc -l | bc) Sass variables:"
+            echo "$SASS_VARS_FOUND"
+            exit 1
+          fi
+
+      - name: Commit Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "Github Action"
+          git add dist/
+          git commit -m "Build library assets"
+          git push

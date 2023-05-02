@@ -63,49 +63,56 @@ body {
 .#{$prefix}box {
     display: block;
     min-width: var(--unit0);
-    
-    @for $i from $minUnitScaleValue through $maxUnitScaleValue {
-        // padding
-        &.#{$prefix}box--padding#{$i} {
-            padding: var(--unit#{$i});
-        }
-        
-        // padding horizontal (left-right)
-        &.#{$prefix}box--padding-h#{$i} {
-            padding-left: var(--unit#{$i});
-            padding-right: var(--unit#{$i});
-        }
-
-        // padding vertical (top-bottom)
-        &.#{$prefix}box--padding-v#{$i} {
-            padding-top: var(--unit#{$i});
-            padding-bottom: var(--unit#{$i});
-        }
-
-        // width
-        &.#{$prefix}box--width#{$i} {
-            width: var(--unit#{$i});
-        }
-        &.#{$prefix}box--max-width#{$i} {
-            max-width: var(--unit#{$i});
-        }
-        &.#{$prefix}box--min-width#{$i} {
-            min-width: var(--unit#{$i});
-        }
-
-        // height
-        &.#{$prefix}box--height#{$i} {
-            height: var(--unit#{$i});
-        }
-        &.#{$prefix}box--max-height#{$i} {
-            max-height: var(--unit#{$i});
-        }
-        &.#{$prefix}box--min-height#{$i} {
-            min-height: var(--unit#{$i});
-        }
-    }
 }
 
+/**
+ *  Padding and Spacing utilities.
+ */
+@for $i from $minUnitScaleValue through $maxUnitScaleValue {
+
+    // padding
+    .#{$prefix}padding#{$i} {
+        padding: var(--unit#{$i});
+    }
+
+    // padding horizontal (left-right)
+    .#{$prefix}padding-h#{$i} {
+        padding-left: var(--unit#{$i});
+        padding-right: var(--unit#{$i});
+    }
+
+    // padding vertical (top-bottom)
+    .#{$prefix}padding-v#{$i} {
+        padding-top: var(--unit#{$i});
+        padding-bottom: var(--unit#{$i});
+    }
+
+    // width
+    .#{$prefix}width#{$i} {
+        width: var(--unit#{$i});
+    }
+
+    .#{$prefix}width-max#{$i} {
+        max-width: var(--unit#{$i});
+    }
+
+    .#{$prefix}width-min#{$i} {
+        min-width: var(--unit#{$i});
+    }
+
+    // height
+    .#{$prefix}height#{$i} {
+        height: var(--unit#{$i});
+    }
+
+    .#{$prefix}height-max#{$i} {
+        max-height: var(--unit#{$i});
+    }
+
+    .#{$prefix}height-min#{$i} {
+        min-height: var(--unit#{$i});
+    }
+}
 
 /**
  * The stack groups its nested elements vertically.

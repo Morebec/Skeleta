@@ -43,7 +43,8 @@ $scaleRatio: 1.61803398875 !default; // Golden ratio
 }
 
 body {
-    min-he
+    min-height: 100vh;
+}
 
 /**
  * Box is the most basic container, and simply defines an element

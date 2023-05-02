@@ -46,6 +46,15 @@ body {
     min-height: 100vh;
 }
 
+
+@mixin flex-basis-scale($className, $denom) {
+    @for $i from 1 to $denom {
+        .#{$prefix}#{$className}-#{$i}\/#{$denom} {
+            flex-basis: calc($i/$denom) * 100%;
+        }
+    }
+}
+
 /**
  * Box is the most basic container, and simply defines an element
  * as being a box. This can be useful to easily add padding to 
@@ -54,9 +63,7 @@ body {
 .#{$prefix}box {
     display: block;
     min-width: var(--unit0);
-
-    // GAP
-
+    
     @for $i from $minUnitScaleValue through $maxUnitScaleValue {
         // padding
         &.#{$prefix}box--padding#{$i} {
@@ -186,6 +193,17 @@ body {
            margin-left: auto;
         }
     }
+
+    .#{$prefix}col-full {
+        flex-basis: 100%;
+    }
+
+    @include flex-basis-scale("col", 2);
+    @include flex-basis-scale("col", 3);
+    @include flex-basis-scale("col", 4);
+    @include flex-basis-scale("col", 5);
+    @include flex-basis-scale("col", 6);
+    @include flex-basis-scale("col", 12);
 }
 
 /**

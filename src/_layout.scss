@@ -38,6 +38,12 @@ $scaleRatio: 1.61803398875 !default; // Golden ratio
     }
 }
 
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+body {
+    min-he
 
 /**
  * Box is the most basic container, and simply defines an element
@@ -140,10 +146,12 @@ $scaleRatio: 1.61803398875 !default; // Golden ratio
     flex-wrap: nowrap;
     flex-direction: row;
 
+    /**
+     * This class allows expanding all the children.
+     */
     &.#{$prefix}columns--expand > * {
         flex-grow: 1;
     }
-
 
     // GAP
     @for $i from $minUnitScaleValue through $maxUnitScaleValue {
@@ -170,7 +178,7 @@ $scaleRatio: 1.61803398875 !default; // Golden ratio
 
 
      // SPLIT
-     .#{$prefix}columns__split {
+    .#{$prefix}columns__split {
         flex-grow: 1;
 
         & + * {

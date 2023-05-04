@@ -1,0 +1,115 @@
+// This file contains general rules for Skeleta to work.
+// It applies some general styles to the body and all elements to follow a border-box box-sizing.
+// It exposes some of the skeleta variables as CSS properties.
+// It also generates the base modifiers for padding, and sizing.
+:root {
+    @include cssCustomProperty('font-size', $skl-fontSize);
+    @include cssCustomProperty('line-length', $skl-lineLength);
+
+    // UNIT SCALE
+    @include cssCustomProperty('unit-ratio', $skl-scaleRatio);
+
+
+    @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+        @if $i < 0 {
+            @include cssCustomProperty("unit#{$i}", calc(var(--#{$skl-prefix}unit#{$i + 1}) / var(--#{$skl-prefix}unit-ratio)));
+        }
+
+        @else if $i >0 {
+            @include cssCustomProperty("unit#{$i}", calc(var(--#{$skl-prefix}unit#{$i - 1}) * var(--#{$skl-prefix}unit-ratio)));
+        }
+
+        @else {
+            @include cssCustomProperty("unit#{$i}", 1rem);
+        }
+    }
+
+    // Screen sizes
+    @each $breakpoint, $size in $screen-sizes {
+        @include cssCustomProperty(screen-size-#{$breakpoint}, $size);
+    }
+}
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+}
+
+/**
+ *  Padding and sizing utilities.
+ */
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+
+    // padding
+    @include modifier('', padding#{$i}) {
+        padding: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    // horizontal padding (left-right)
+    @include modifier('', padding-x#{$i}) {
+        padding-left: var(--#{$skl-prefix}unit#{$i});
+        padding-right: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    // vertical padding (top-bottom)
+    @include modifier('', padding-y#{$i}) {
+        padding-top: var(--#{$skl-prefix}unit#{$i});
+        padding-bottom: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    // width
+    @include modifier('', width#{$i}) {
+        width: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    @include modifier('', width-max#{$i}) {
+        max-width: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    @include modifier('', width-min#{$i}) {
+        min-width: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    // height
+    @include modifier('', height#{$i}) {
+        height: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    @include modifier('', height-max#{$i}) {
+        max-height: var(--#{$skl-prefix}unit#{$i});
+    }
+
+    @include modifier('', height-min#{$i}) {
+        min-height: var(--#{$skl-prefix}unit#{$i});
+    }
+}
+
+/**
+ * Breakpoint specific visibility.
+ */
+@include modifier('', 'hidden') {
+    display: hidden;
+}
+
+@include modifier('', 'no-wrap') {
+    flex-wrap: nowrap;
+}
+@include modifier('', 'wrap') {
+    flex-wrap: wrap;
+}
+@include modifier('', 'wrap-reverse') {
+    flex-wrap: wrap-reverse;
+}
+
+@include flexBasisModifier('');
+@include modifier('', 'no-shrink') {
+    flex-shrink: 0;
+}
+@include modifier('', 'no-grow') {
+    flex-grow: 0;
+}

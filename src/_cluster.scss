@@ -1,0 +1,16 @@
+/**
+ * The Cluster aligns elements horizontally that differ in length in a row and wraps
+ * them when needed.
+ * Modifiers:
+ *  - `gap`: adds spacing between elements.
+ * Responsiveness:
+ *     Wraps elements vertically.
+ */
+@include component('cluster') {
+    display: flex;
+    flex-wrap: wrap;
+
+   
+}
+@include gapModifier('cluster');
+@include justifyModifier('cluster');

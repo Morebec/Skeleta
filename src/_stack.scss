@@ -1,0 +1,23 @@
+/**
+ * The stack groups its nested elements vertically.
+ * Modifiers:
+ *  - `gap`: adds spacing between nested elements.
+ *  - `justify`: adds
+ */
+@include component('stack') {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    &:only-child {
+        height: 100%;
+    }    
+}
+
+@include gapModifier('stack');
+@include justifyModifier('stack');
+
+// SPLIT
+@include component('stack__split') {
+    margin-top: auto;
+}

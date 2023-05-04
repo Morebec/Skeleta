@@ -1,0 +1,44 @@
+/**
+ * Columns displays child elements as columns.
+ * Responsiveness: 
+ *     It does not wrap the elements, and maintains the column structure.
+ *     For a wrapping behaviour, see the Switcher component.
+ **/
+@include component('columns') {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+@include justifyModifier('columns');
+@include alignModifier('columns');
+@include gapModifier('columns');
+
+/**
+ * This class allows expanding all the children.
+ */
+@include modifier('columns', expand){
+    & >* {
+        flex-grow: 1;
+    }
+}
+
+/**
+ * Represents elements that are nested inside a columns component.
+ */
+@include component('col') {}
+@include flexBasisModifier('col');
+@include modifier('col', 'no-shrink');
+@include modifier('col', 'no-shrink');
+
+/**
+ * This component allows defining a div as being an empty space 
+ * that pushes the rest of the columns to the end of the columns.
+ */
+@include modifier('col', 'split') {
+    flex-grow: 1;
+
+    &+* {
+        margin-left: auto;
+    }
+}

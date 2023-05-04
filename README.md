@@ -1,17 +1,17 @@
 # Skeleta
 
-Skeleta is a lightweight CSS library that provides a flexible skeleton for
-building modern, responsive layouts. It is based on a content-first layout flow
-using modern css properties such as flex and grid as opposed to relying mostly on breakpoints for adaptive design.
+Skeleta is a CSS library that aims to simplify the process of creating responsive layouts. It provides a set of pre-built classes and components that can be easily customized to create complex designs that look great on any device.
 
-Skeleta is built with modern CSS practices and includes a set of pre-built classes and components that allow you to easily create complex layouts that look great on any device.
+Skeleta is built using modern CSS practices and prioritizes a content-first approach to layout design. This means that instead of relying primarily on breakpoints for responsive design, Skeleta focuses on creating layouts that prioritize the content and adapt to different screen sizes and devices without sacrificing readability or usability.
+
+With Skeleta, you can quickly and easily create responsive designs that are both functional and visually appealing, without the need for extensive custom CSS or complicated media queries.
 
 ## Features
 
 - Lightweight and fast
 - Built with modern CSS practices
+- Content-Flow First
 - Fully responsive
-- Includes a set of pre-built classes for creating complex layouts
 - Easy to customize and extend
 
 ## Getting Started
@@ -25,10 +25,10 @@ Skeleta comes in two flavors:
 
 ```bash
 # For the css-only version
-npm install skeleta-css
+npm install @morebec/skeleta-css
 
 # For the react version.
-npm install skeleta-react
+npm install @morebec/skeleta-react
 ```
 
 ## License

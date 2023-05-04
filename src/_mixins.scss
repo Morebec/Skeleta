@@ -1,0 +1,159 @@
+// This file contains all the mixins used in Skeleta
+
+
+/** 
+ * Allows applying css rules based on some screen size as defined by 'xs', 'sm', 'md', 'lg', 'xl' and '2x'.
+ * It follows a mobile first approach where the generated media query will apply to the specified
+ * breakpoint and "above". The only exception being, 'xs' which will apply the rules from 'xs' to anything smaller.
+ * Usage @include breakpoint(sm) { rule: value; } 
+ */
+@mixin breakpoint($class) {
+$size: map-get($screen-sizes, $class);
+    $keys: map-keys($screen-sizes);
+    $smallest: nth($keys, 1);
+    @if $class == $smallest {
+        @media screen and (max-width: $size) {
+            @content;
+        }
+    }
+    @else {
+        @media screen and (min-width: $size) {
+            @content;
+        }
+    }
+}
+
+/**
+ * This mixin allows defining a CSS custom property easily.
+ */
+@mixin cssCustomProperty($name, $value) {
+    --#{$skl-prefix}#{$name}: #{$value};
+}
+
+/**
+ * This mixin allows to easily define a component's styling rules.
+ * It ensures the component's name is properly prefixed and will generate variants
+ * of the component rules for each breakpoint.
+ */
+@mixin component($componentName) {
+   // Define a placeholder
+    %#{$skl-prefix}#{$componentName} {
+        @content;
+    }
+
+    // Define a class without explicit breakpoints
+    .#{$skl-prefix}#{$componentName} {
+        @extend %#{$skl-prefix}#{$componentName};
+    }
+
+    // Do the same for each screen size
+    @each $breakpoint, $size in $screen-sizes {
+        $scopedClassName: "#{$breakpoint}\\:#{$componentName}";
+        
+        %#{$skl-prefix}#{$scopedClassName} {
+            @include breakpoint($breakpoint) {
+                @content;
+            }
+        }
+
+        .#{$skl-prefix}#{$scopedClassName} {
+            @include breakpoint($breakpoint) {
+                @content;
+            }
+        }
+    }
+}
+
+/**
+ * This mixin allows to easily define a component modifier's styling rules.
+ * It ensures the the modifier's name is properly prefixed the component's name and modifier 
+ * prefix.
+ * If the modifier does not apply to a specific component, simply pass "" as the component name.
+ * Note: this mixin is not intended to be nested within a component when used.
+ */
+@mixin modifier($componentName, $modifierName) {
+    $className: "#{$componentName}--#{$modifierName}";
+    
+    // Define a placeholder.
+    %#{$skl-prefix}#{$className} {
+        @content;
+    }
+
+    // Define class.
+    .#{$skl-prefix}#{$className} {
+        @content;
+    }
+    
+    // Do the same for each breakpoints.
+    @each $breakpoint, $size in $screen-sizes {
+        $scopedClassName: "#{$breakpoint}\\:#{$className}";
+        %#{$skl-prefix}#{$scopedClassName} {
+            @include breakpoint($breakpoint) {
+                @content;
+            }
+        }
+
+        .#{$skl-prefix}#{$scopedClassName} {
+            @include breakpoint($breakpoint) {
+                @content;
+            }
+        }
+    }
+}
+
+/**
+ * Defines a modifier for the flex "gap" property based on the unit scale for a given component.
+ */
+@mixin gapModifier($componentName) {
+    @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+        @include modifier($componentName, gap#{$i}) {
+            gap: var(--#{$skl-prefix}unit#{$i});
+        }
+    }
+}
+
+/**
+ * Defines a modifier for the flex "justify" property based on the unit scale for a given component.
+ */
+@mixin justifyModifier($componentName) {
+    @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
+        @include modifier($componentName, justify-#{$i}) {
+            justify-content: #{$i};
+        }
+    }
+}
+
+/**
+ * Defines a modifier for the flex "align" property based on the unit scale for a given component.
+ */
+@mixin alignModifier($componentName) {
+    @each $i in 'stretch', 'start', 'end', 'center' {
+        @include modifier($componentName, align-#{$i}) {
+            align-content: #{$i};
+        }
+    }
+}
+
+/**
+ * Defines a modifier for the "flex-basis" property for a given component using fractions.
+ * E.g.:
+ * @include flexBasisModifier('col', 3);
+ * will produce the following classes:
+ * - .col--basis-1/3 {flex-basis: 33.33334%;}
+ * - .col--basis-2/3 {flex-basis: 66.33334%;}
+ * - .col--basis-full {flex-basis: 100%;}
+ */
+@mixin flexBasisModifier($componentName) {
+    @each $denom in 2,3,4,5,6,12 {
+        @for $i from 1 to $denom {
+            @include modifier($componentName, basis-#{$i}\/#{$denom}) {
+                flex-basis: calc($i/$denom) * 100%;
+            }
+        }
+    }
+
+    // Generate the full flex-basis
+    @include modifier($componentName, basis-full) {
+        flex-basis: 100%;
+    }
+}

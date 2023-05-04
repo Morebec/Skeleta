@@ -1,0 +1,35 @@
+/**
+ * The switcher lays out its nested elements side by side and wraps them when 
+ * they overflow. As opposed to the Cluster, when they wrap they will take the 
+ * full space available horizontally.
+ **/
+ @include component('switcher') {
+    display: flex;
+    flex-wrap: wrap;
+
+    align-items: flex-start;
+
+
+    // SPLIT
+    .#{$skl-prefix}switcher__split {
+        &+* {
+            margin-left: auto;
+        }
+
+        flex-grow: 1;
+    }
+}
+
+@include justifyModifier('switcher');
+@include alignModifier('switcher');
+@include gapModifier('switcher');
+
+/**
+ * This modifier allows expanding all the nested elements of the switcher.
+ */
+@include modifier('switcher', expand) { 
+    & > * {
+        flex-grow: 1;
+        height: 100%;
+    }
+}

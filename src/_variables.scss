@@ -1,0 +1,39 @@
+// Prefix to be applied to the generated class names and variable names. (e.g. 'skl-' would produce 'skl-box')
+$skl-prefix: "" !default;
+
+// base font-size
+$skl-fontSize: 16px !default;
+
+// Defines the longest comfortably readable length of content.
+// This property is used by different components to establish max-width properties
+// and responsiveness.
+$skl-lineLength: 120ch !default;
+
+/**
+ *  UNIT SCALE
+ * The unit scale defines a list of values that can be used for padding, margin and sizes for an harmonious
+ * and consistent design. by default Its increments are based on a modular scale.
+ * It contains a main size (based on the current font-size) known as unit0 and increases for n levels (maxUnitScaleValue)
+ * It also decreases below the unit0 for n levels (minUnitScaleValue)
+ **/
+$skl-minUnitScaleValue: -5 !default;
+$skl-maxUnitScaleValue: 10 !default;
+$GOLDEN_RATIO: 1.61803398875;
+$skl-scaleRatio: $GOLDEN_RATIO !default;
+
+// Responsive breakpoints
+$screen-xs: 480px !default;
+$screen-sm: 600px !default;
+$screen-md: 840px !default;
+$screen-lg: 960px !default;
+$screen-xl: 1280px !default;
+$screen-xxl: 1440px !default;
+
+$screen-sizes: (
+    xs: $screen-xs,
+    sm: $screen-sm,
+    md: $screen-md,
+    lg: $screen-lg,
+    xl: $screen-xl,
+    xxl: $screen-xxl
+) !default;

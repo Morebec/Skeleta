@@ -7,11 +7,10 @@ body {
 }
 
 .card {
-    @extend .box;
-    @extend .padding2;
+    @extend %--padding2;
 
-    @extend .stack;
-    @extend .stack--gap0;
+    @extend %stack;
+    @extend %stack--gap0;
 
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: var(--unit0);
@@ -32,8 +31,7 @@ body {
 }
 
 button {
-    @extend .box;
-    @extend .width-max6;
+    @extend %--width-max6;
 
     color: transparent;
     border-radius: var(--unit0);
@@ -56,9 +54,8 @@ code {
 }
 
 .example {
-    @extend .box;
-    @extend .padding-h2;
-    @extend .padding-v1;
+    @extend %--padding-x2;
+    @extend %--padding-y1;
 
 
     border: 1px solid rgba(160,174,192);

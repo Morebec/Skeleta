@@ -1,6 +1,11 @@
+@import "variables";
+@import "mixins";
+
 @import "normalize";
 
-// Prefix to be applied to the generated class names and variable names. (e.g. skl-box)
-$prefix: "" !default;
-
-@import "layout";
+@import "base";
+@import "center";
+@import "cluster";
+@import "grid";
+@import "stack";
+@import "switcher";

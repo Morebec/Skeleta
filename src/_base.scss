@@ -4,6 +4,7 @@
 // It also generates the base modifiers for padding, and sizing.
 :root {
     @include cssCustomProperty('font-size', $skl-fontSize);
+    font-size: var(--#{$skl-prefix}font-size);
     @include cssCustomProperty('line-length', $skl-lineLength);
 
     // UNIT SCALE

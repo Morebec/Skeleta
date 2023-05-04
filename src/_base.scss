@@ -94,7 +94,7 @@ body {
  * Breakpoint specific visibility.
  */
 @include modifier('', 'hidden') {
-    display: hidden !important;
+    display: none !important;
 }
 
 @include modifier('', 'no-wrap') {

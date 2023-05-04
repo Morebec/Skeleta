@@ -64,28 +64,28 @@ body {
 
     // width
     @include modifier('', width#{$i}) {
-        width: var(--#{$skl-prefix}unit#{$i});
+        width: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 
     @include modifier('', width-max#{$i}) {
-        max-width: var(--#{$skl-prefix}unit#{$i});
+        max-width: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 
     @include modifier('', width-min#{$i}) {
-        min-width: var(--#{$skl-prefix}unit#{$i});
+        min-width: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 
     // height
     @include modifier('', height#{$i}) {
-        height: var(--#{$skl-prefix}unit#{$i});
+        height: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 
     @include modifier('', height-max#{$i}) {
-        max-height: var(--#{$skl-prefix}unit#{$i});
+        max-height: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 
     @include modifier('', height-min#{$i}) {
-        min-height: var(--#{$skl-prefix}unit#{$i});
+        min-height: var(--#{$skl-prefix}unit#{$i}) !important;
     }
 }
 
@@ -93,23 +93,23 @@ body {
  * Breakpoint specific visibility.
  */
 @include modifier('', 'hidden') {
-    display: hidden;
+    display: hidden !important;
 }
 
 @include modifier('', 'no-wrap') {
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
 }
 @include modifier('', 'wrap') {
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
 }
 @include modifier('', 'wrap-reverse') {
-    flex-wrap: wrap-reverse;
+    flex-wrap: wrap-reverse !important;
 }
 
 @include flexBasisModifier('');
 @include modifier('', 'no-shrink') {
-    flex-shrink: 0;
+    flex-shrink: 0 !important;
 }
 @include modifier('', 'no-grow') {
-    flex-grow: 0;
+    flex-grow: 0 !important;
 }

@@ -144,16 +144,20 @@ $size: map-get($screen-sizes, $class);
  * - .col--basis-full {flex-basis: 100%;}
  */
 @mixin flexBasisModifier($componentName) {
+    $important: "";
+    @if $componentName == "" {
+        $important: "!important";
+    }
     @each $denom in 2,3,4,5,6,12 {
         @for $i from 1 to $denom {
             @include modifier($componentName, basis-#{$i}\/#{$denom}) {
-                flex-basis: calc($i/$denom) * 100%;
+                flex-basis: calc($i/$denom) * 100% #{$important};
             }
         }
     }
 
     // Generate the full flex-basis
     @include modifier($componentName, basis-full) {
-        flex-basis: 100%;
+        flex-basis: 100% #{$important};
     }
 }

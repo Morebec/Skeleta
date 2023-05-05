@@ -45,13 +45,16 @@ body {
     max-inline-size: sklGetVar('line-length');
 }
 
-// Remove non-inline elements maximum size.
-html,
+// Remove maximum size from block elements
+article,
+aside,
 body,
 div,
 header,
-nav,
+html,
 main,
+nav,
+section,
 footer {
     max-inline-size: none;
 }

@@ -52,9 +52,75 @@
                 </skl-columns>
             </div>
 
+            <h3>Columns gap</h3>
+            <p>
+                The columns supports the <code>gap{unit}</code> modifier wich allows specifying
+                how much spacing the component should put between elements.
+                <br>
+                The following example shows the <code>gap2</code> modifier.
+            </p>
+            <div class="example">
+                <skl-columns class="gap2">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-columns>
+            </div> <!-- gap -->
+
+            <h3>Columns padding</h3>
+            <p>
+                The columns supports the <code>padding{unit}</code> modifier wich allows specifying
+                how much padding the container should add.
+                <br>
+                The following example shows the <code>padding2</code> modifier.
+            </p>
+            <div class="example">
+                <skl-columns class="padding2 gap0">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-columns>
+            </div> <!-- padding -->
+
             <h3>Columns justification</h3>
             <p>
-                The columns supports the <code>columns--justify</code>  modifier wich allows specifying
+                The columns supports the <code>justify-{start, end, space-around, space-between}</code>  modifier wich allows specifying
                 where should the elements be justified.
                 <br>
                 The following example shows the <code>columns--justify-center</code> modifier.
@@ -75,6 +141,40 @@
                             <button class="button button--primary">...</button>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-columns>
+            </div> <!-- justification -->
+
+            <h3>Columns splitting</h3>
+            <p>
+                The columns supports the <code>split</code> modifier on the <code>col</code> sub-component
+                which allows pushing the rest of columns that follow the given <code>col.split</code> sub-component 
+                to the end of the container's space.
+            </p>
+            <div class="example">
+                <skl-columns class="gap2">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <skl-col class="split">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    </skl-col>
                     <div class="card">
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>

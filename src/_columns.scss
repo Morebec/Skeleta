@@ -4,21 +4,22 @@
  *     It does not wrap the elements, and maintains the column structure.
  *     For a wrapping behaviour, see the Switcher component.
  **/
-@include sklComponent('columns') {
+@include sklComponent(columns) {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
 }
 
-@include sklAlignModifier('columns');
-@include sklJustifyModifier('columns');
-@include sklGapModifier('columns');
-@include sklPaddingModifier('columns');
+@include sklAlignModifier(columns);
+@include sklJustifyModifier(columns);
+@include sklGapModifier(columns);
+@include sklPaddingModifier(columns);
+
 
 /**
  * This class allows expanding all the children in a column.
  */
-@include sklModifier('columns', expanded){
+@include sklModifier(columns, expanded){
     & > * {
         flex-grow: 1;
     }
@@ -34,10 +35,7 @@
  * This component allows defining a div as being an empty space 
  * that pushes the rest of the columns to the end of the remaining space.
  */
-@include sklModifier('col', 'split') {
-    flex-grow: 1;
-
-    &+* {
-        margin-left: auto;
-    }
+@include sklModifier(col, split) {
+    margin-inline-start: auto;
 }
+

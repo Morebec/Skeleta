@@ -8,7 +8,11 @@
     <link rel="stylesheet" type="text/css" href="../dist/docs.min.css">
 </head>
 <body>
-<skl-center>
+
+    <div class="box">
+        hello
+    </div>
+<skl-center-h>
     <skl-stack class="gap3">
         <section id="columns">
             <h2>Columns</h2>
@@ -22,7 +26,7 @@
                 and an image or media in another one rely on this very feature to allow hiding the image or showing less 
                 of it depending on the screen width.
             </p>
-            <skl-columns class="example">
+            <div class="example">
                 <skl-columns class="gap0"> 
                     <div class="card">
                         <div class="text-title">...</div>
@@ -46,7 +50,7 @@
                         </div>
                     </div>
                 </skl-columns>
-            </skl-columns>
+            </div>
 
             <h3>Columns justification</h3>
             <p>
@@ -275,7 +279,7 @@
                 It also sets its max width to the <code>--line-length</code> CSS custom property.
             </p>
             <div class="example">
-                <skl-center>
+                <skl-center-h>
                     <div class="card">
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>
@@ -283,20 +287,50 @@
                             <button class="button button--primary">...</button>
                         </div>
                     </div>
-                </skl-center>
+                </skl-center-h>
             </div>
+            <div class="example">
+                <skl-center-v>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-center-v>
+            </div>
+            <div class="example">
+                <skl-center-h>
+                    <skl-center-v>
+                        <div class="card">
+                            <div class="text-title">...</div>
+                            <div class="text-paragraph">...</div>
+                            <div>
+                                <button class="button button--primary">...</button>
+                            </div>
+                        </div>
+                    </skl-center-v>
+                </skl-center-h>
+            </div>
+
         </section> <!-- center -->
 
 
-        <section id="cover">
-            <h2>Cover</h2>
+        <section id="viewport">
+            <h2>Viewport</h2>
             <p>
-                Is a component that allows it to be centered both vertically and horizontally within its parent.
+               The Viewport is a component that takes the width and height of the document.
             </p>
             <div class="example">
-                <skl-cover>
-                    <h1>Hello Skeleta!</h1>
-                </skl-cover>
+                <skl-viewport>
+                    <skl-center-v>
+                        <skl-center-h>
+                            <h1>Hello Skeleta!</h1>
+                            <p>Welcome to Skeleta's viewport documentation.</p>
+                        </skl-center-h>
+                    </skl-center-v>
+                </skl-viewport>
             </div>
         </section>
 

@@ -35,6 +35,9 @@ body {
     min-height: 100vh;
 }
 
+
+// Handle max-inline-size
+// for all inline elements.
 *,
 ::after,
 ::before {
@@ -42,6 +45,7 @@ body {
     max-inline-size: sklGetVar('line-length');
 }
 
+// Remove non-inline elements maximum size.
 html,
 body,
 div,

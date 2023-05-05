@@ -1,32 +1,60 @@
 /**
- * Center simply centers itself within its parent both vertically and horizontally.
- * Modifier:
- *  - `content-centered`: Centers its nested element within the `center` element.
- * 
- * In CSS to center a div, it must have a width.
- * In the case here, the width is calculated using the --line-length property.
+ * Center-h is a component that centers its elements within itself horizontally.
+ * If multiple elements are nested within the center they will all be centered in a column like fashion.
  */
- @include sklComponent('center') {
-    display: block;
-
+ @include sklComponent(center-h) {
     box-sizing: content-box;
-
-    /* ↓ Only affect horizontal margins */
     margin-left: auto;
     margin-right: auto;
-    
-    margin-inline: auto;
-    max-inline-size: sklGetVar('line-length');
-
-    // Ensure a minimum size on smaller screens, where the margins do not appear.
-    padding-left: sklGetVar('unit-1');
-    padding-right: sklGetVar('unit-1');
-
-    max-width: sklGetVar('line-length');
-}
-
-@include sklModifier('center', 'content-centered') {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    // Ensure a minimum size on smaller screens, where the margins do not appear.
+    padding-left: sklGetVar(unit-1);
+    padding-right: sklGetVar(unit-1);
+
+    & > * {
+        max-width: 100% !important;
+    }
+
+    // display: block;
+//     
+    // // Ensure a minimum size on smaller screens, where the margins do not appear.
+    // padding-left: sklGetVar(unit-1);
+    // padding-right: sklGetVar(unit-1);
+// 
+//     
+    // /* Only affect horizontal margins */
+    // margin-left: auto;
+    // margin-right: auto;
+// 
+    // margin-inline: auto;
+    // max-inline-size: sklGetVar(line-length);
+}
+
+@include sklPaddingModifier(center-h);
+
+/**
+ * Center-h is a component that centers its elements within itself vertically.
+ * It requires to be in a container element that has a height and that gives it a height.
+ * By default any parent component to a center-v sets its `min-height` to 100%.
+ * 
+ * If multiple elements are nested within the center they will all be centered in a row like fashion.
+ */
+@include sklComponent(center-v) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    // Ensure a minimum size on smaller screens, where the margins do not appear.
+    padding-top: sklGetVar(unit-1);
+    padding-bottom: sklGetVar(unit-1);
+}
+
+// Any parent that contains a center should allow it to fill it so that it can effectively
+// display its content in its center.
+* > #{sklGetComponentName(center-v)} {
+    min-height: 100%;
 }

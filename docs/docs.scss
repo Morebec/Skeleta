@@ -109,11 +109,10 @@ code {
 
 #center {
     .example {
-        height: 300px;
-        width: 100%;
-
+        resize: both;
         .card {
             height: 200px;
+            min-width: 400px;
         }
     }
 }

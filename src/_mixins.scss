@@ -66,6 +66,7 @@
    // The name of the palce holder is %<component prefix><component name>
    $placeholderName: $componentName;
     %#{$placeholderName} {
+        max-inline-size: none;
         @content;
     }
 

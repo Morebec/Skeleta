@@ -45,7 +45,6 @@
 @include sklComponent(center-v) {
     display: flex;
     flex-direction: row;
-    justify-content: center;
     align-items: center;
 
     // Ensure a minimum size on smaller screens, where the margins do not appear.

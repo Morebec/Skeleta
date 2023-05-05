@@ -3,31 +3,53 @@
 
 /** 
  * Allows applying css rules based on some screen size as defined by 'xs', 'sm', 'md', 'lg', 'xl' and '2x'.
- * It follows a mobile first approach where the generated media query will apply to the specified
- * breakpoint and "above". The only exception being, 'xs' which will apply the rules from 'xs' to anything smaller.
- * Usage @include breakpoint(sm) { rule: value; } 
+ * The rules provided will apply from the breakpoint and "above". 
+ * The only exception being, 'xs' which will apply the rules from 'xs' to anything smaller.
+ * Usage @include sklApplyAfterBreakpoint(sm) { rule: value; } 
  */
-@mixin breakpoint($class) {
-$size: map-get($screen-sizes, $class);
-    $keys: map-keys($screen-sizes);
-    $smallest: nth($keys, 1);
-    @if $class == $smallest {
-        @media screen and (max-width: $size) {
-            @content;
-        }
+@mixin sklApplyAfterBreakpoint($class) {
+    $size: map-get($skl-screen-sizes, $class);
+
+    @media screen and (min-width: $size) {
+        @content;
     }
-    @else {
-        @media screen and (min-width: $size) {
-            @content;
-        }
+}
+
+/** 
+ * Allows applying css rules based on some screen size as defined by 'xs', 'sm', 'md', 'lg', 'xl' and '2x'.
+ * The rules provided will apply from the breakpoint and "under". 
+ * The only exception being, 'xs' which will apply the rules from 'xs' to anything smaller.
+ * Usage @include applyBeforeBreakpoint(sm) { rule: value; } 
+ */
+@mixin sklApplyBeforeBreakpoint($class) {
+    $size: map-get($skl-screen-sizes, $class);
+
+    @media screen and (max-width: $size) {
+        @content;
     }
 }
 
 /**
- * This mixin allows defining a CSS custom property easily.
+ * This mixin allows defining a CSS custom property that will be correctly prefixed.
  */
-@mixin cssCustomProperty($name, $value) {
-    --#{$skl-prefix}#{$name}: #{$value};
+@mixin sklNewVar($name, $value) {
+    $propName: sklVarName($name);
+    #{$propName}: #{$value};
+}
+
+/**
+ * This function returns the prefixed name of a CSS custom property.
+ */
+@function sklVarName($name) {
+    @return --#{$skl-varPrefix}#{$name};
+}
+
+/**
+ * This function returns the value var(--my-var) of a given CSS custom property and ensuring
+ * it is correctly prefixed.
+ */
+@function sklGetVar($name) {
+    @return var(sklVarName($name));
 }
 
 /**
@@ -35,33 +57,57 @@ $size: map-get($screen-sizes, $class);
  * It ensures the component's name is properly prefixed and will generate variants
  * of the component rules for each breakpoint.
  */
-@mixin component($componentName) {
-   // Define a placeholder
-    %#{$skl-prefix}#{$componentName} {
+@mixin sklComponent($name) {
+    $componentName: sklGetComponentName($name);
+
+
+   // Define a placeholder for the style so that it can be reused
+   // on custom html tags using Sass.
+   // The name of the palce holder is %<component prefix><component name>
+   $placeholderName: $componentName;
+    %#{$placeholderName} {
         @content;
     }
 
-    // Define a class without explicit breakpoints
-    .#{$skl-prefix}#{$componentName} {
-        @extend %#{$skl-prefix}#{$componentName};
+    // Define a stand alone rule that can be used outside of skeleta components.
+    @if $skl-generateStandaloneRules {
+        $className: $componentName;
+        .#{$className} {
+            @extend %#{$placeholderName};
+        }
     }
+
+    // Define a style for the custom skeleta component
+    @if $skl-generateComponentRules {   
+        #{$componentName} {
+            @extend %#{$placeholderName};
+        }
+    }
+    
 
     // Do the same for each screen size
-    @each $breakpoint, $size in $screen-sizes {
-        $scopedClassName: "#{$breakpoint}\\:#{$componentName}";
-        
-        %#{$skl-prefix}#{$scopedClassName} {
-            @include breakpoint($breakpoint) {
-                @content;
-            }
-        }
+    // @each $breakpoint, $size in $skl-screen-sizes {
+        // $scopedClassName: "#{$breakpoint}\\:#{$componentName}";
+//         
+        // %#{$skl-prefix}#{$scopedClassName} {
+            // @include sklApplyAfterBreakpoint($breakpoint) {
+                // @content;
+            // }
+        // }
+// 
+        // .#{$skl-prefix}#{$scopedClassName} {
+            // @include sklApplyAfterBreakpoint($breakpoint) {
+                // @content;
+            // }
+        // }
+    // }
+}
 
-        .#{$skl-prefix}#{$scopedClassName} {
-            @include breakpoint($breakpoint) {
-                @content;
-            }
-        }
-    }
+/**
+ * Returns the name of a component with its prefix.
+ */
+@function sklGetComponentName($name) {
+    @return #{$skl-componentPrefix}#{$name};
 }
 
 /**
@@ -71,43 +117,64 @@ $size: map-get($screen-sizes, $class);
  * If the modifier does not apply to a specific component, simply pass "" as the component name.
  * Note: this mixin is not intended to be nested within a component when used.
  */
-@mixin modifier($componentName, $modifierName) {
-    $className: "#{$componentName}--#{$modifierName}";
-    
+@mixin sklModifier($componentName, $name) {   
+    $componentName: sklGetComponentName($componentName);
+
     // Define a placeholder.
-    %#{$skl-prefix}#{$className} {
+    // placeholder names are defined as
+    // %<component prefix><component name>--<modifier name>
+    // e.g.: %skl-stack--gap0
+    $placeholderName: #{$componentName}--#{$name};
+    %#{$placeholderName} {
         @content;
     }
 
-    // Define class.
-    .#{$skl-prefix}#{$className} {
-        @content;
+    // Define a stand alone class that allows reusing the styles outside of skeleta components.
+    // .<component prefix><component name>--<modifier name>
+    // e.g.: .skl-stack--gap0
+    @if $skl-generateStandaloneRules {
+        $className: #{$componentName}--#{$name};
+        .#{$componentName}.#{$className} {
+            @extend %#{$placeholderName};
+        }
+    }
+
+    // Define a class that applies to the skl component.
+    @if $skl-generateComponentRules {
+
+        #{$componentName}.#{$name} {
+            @extend %#{$placeholderName};
+        }
     }
     
-    // Do the same for each breakpoints.
-    @each $breakpoint, $size in $screen-sizes {
-        $scopedClassName: "#{$breakpoint}\\:#{$className}";
-        %#{$skl-prefix}#{$scopedClassName} {
-            @include breakpoint($breakpoint) {
-                @content;
-            }
-        }
+    // Define a rule that applies to the component 
+    // e.g. <skl-stack class="gap0"></skl-stack>
 
-        .#{$skl-prefix}#{$scopedClassName} {
-            @include breakpoint($breakpoint) {
-                @content;
-            }
-        }
-    }
+
+    // Do the same for each breakpoints.
+    // @each $breakpoint, $size in $skl-screen-sizes {
+        // $scopedClassName: "#{$breakpoint}\\:#{$className}";
+        // %#{$skl-prefix}#{$scopedClassName} {
+            // @include sklApplyAfterBreakpoint($breakpoint) {
+                // @content;
+            // }
+        // }
+// 
+        // .#{$skl-prefix}#{$scopedClassName} {
+            // @include sklApplyAfterBreakpoint($breakpoint) {
+                // @content;
+            // }
+        // }
+    // }
 }
 
 /**
  * Defines a modifier for the flex "gap" property based on the unit scale for a given component.
  */
-@mixin gapModifier($componentName) {
+@mixin sklGapModifier($componentName) {
     @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
-        @include modifier($componentName, gap#{$i}) {
-            gap: var(--#{$skl-prefix}unit#{$i});
+        @include sklModifier($componentName, gap#{$i}) {
+            gap: sklGetVar(unit#{$i});
         }
     }
 }
@@ -115,9 +182,9 @@ $size: map-get($screen-sizes, $class);
 /**
  * Defines a modifier for the flex "justify" property based on the unit scale for a given component.
  */
-@mixin justifyModifier($componentName) {
+@mixin sklJustifyModifier($componentName) {
     @each $i in 'space-between', 'space-around', 'space-evenly', 'start', 'end', 'center' {
-        @include modifier($componentName, justify-#{$i}) {
+        @include sklModifier($componentName, justify-#{$i}) {
             justify-content: #{$i};
         }
     }
@@ -126,9 +193,9 @@ $size: map-get($screen-sizes, $class);
 /**
  * Defines a modifier for the flex "align" property based on the unit scale for a given component.
  */
-@mixin alignModifier($componentName) {
+@mixin sklAlignModifier($componentName) {
     @each $i in 'stretch', 'start', 'end', 'center' {
-        @include modifier($componentName, align-#{$i}) {
+        @include sklModifier($componentName, align-#{$i}) {
             align-content: #{$i};
         }
     }
@@ -137,27 +204,51 @@ $size: map-get($screen-sizes, $class);
 /**
  * Defines a modifier for the "flex-basis" property for a given component using fractions.
  * E.g.:
- * @include flexBasisModifier('col', 3);
+ * @include sklFlexBasisModifier('col', 3);
  * will produce the following classes:
  * - .col--basis-1/3 {flex-basis: 33.33334%;}
  * - .col--basis-2/3 {flex-basis: 66.33334%;}
  * - .col--basis-full {flex-basis: 100%;}
  */
-@mixin flexBasisModifier($componentName) {
+@mixin sklFlexBasisModifier($componentName) {
     $important: "";
     @if $componentName == "" {
         $important: "!important";
     }
     @each $denom in 2,3,4,5,6,12 {
         @for $i from 1 to $denom {
-            @include modifier($componentName, basis-#{$i}\/#{$denom}) {
+            @include sklModifier($componentName, basis-#{$i}\/#{$denom}) {
                 flex-basis: calc($i/$denom) * 100% #{$important};
             }
         }
     }
 
     // Generate the full flex-basis
-    @include modifier($componentName, basis-full) {
+    @include sklModifier($componentName, basis-full) {
         flex-basis: 100% #{$important};
+    }
+}
+
+/**
+ * Generates modifiers that allow giving padding to a given component.
+ * It generates padding classes based on the unitScale.
+ */
+@mixin sklPaddingModifier($componentName) {
+    @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+        @include sklModifier($componentName, padding#{$i}) {
+            padding: sklGetVar(unit#{$i});
+        }
+
+        // horizontal padding (left-right)
+        @include sklModifier($componentName, padding-x#{$i}) {
+            padding-left: sklGetVar(unit#{$i});
+            padding-right: sklGetVar(unit#{$i});
+        }
+
+        // vertical padding (top-bottom)
+        @include sklModifier($componentName, padding-y#{$i}) {
+            padding-top: sklGetVar(unit#{$i});
+            padding-bottom: sklGetVar(unit#{$i});
+        }
     }
 }

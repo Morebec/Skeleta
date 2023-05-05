@@ -1,12 +1,30 @@
-// Prefix to be applied to the generated class names and variable names. (e.g. 'skl-' would produce 'skl-box')
-$skl-prefix: "" !default;
+// Prefix added to all components and custom css property definitions, unless they are individually overriden.
+$skl-prefix: "skl-" !default;
+
+// Prefix added to all the names of component style definitions.
+$skl-componentPrefix: $skl-prefix !default;
+
+// Prefix added to all the names of the custom css property definitions.
+$skl-varPrefix: $skl-prefix !default;
+
+// Indicates if the standalone css classes should be generated or not.
+// If you intend to style non skeleta components you should set this to true,
+// otherwise, when only using skeleta components you can set this to false.
+// When this is false, it will reduce the amount of CSS generated.
+$skl-generateStandaloneRules: true !default;
+
+// Indicates if the component styling rule should be generated or not.
+// If you intend to use skeleta components you should set this to true,
+// otherwise, when not using skeleta components you can set this to false.
+// When this is false, it will reduce the amount of CSS generated.
+$skl-generateComponentRules: true !default;
 
 // base font-size
 $skl-fontSize: 16px !default;
 
 // Defines the longest comfortably readable length of content.
 // This property is used by different components to establish max-width properties
-// and responsiveness.
+// and responsiveness. This is also known as the measure of the text.
 $skl-lineLength: 120ch !default;
 
 /**
@@ -22,18 +40,18 @@ $GOLDEN_RATIO: 1.61803398875;
 $skl-scaleRatio: $GOLDEN_RATIO !default;
 
 // Responsive breakpoints
-$screen-xs: 480px !default;
-$screen-sm: 600px !default;
-$screen-md: 840px !default;
-$screen-lg: 960px !default;
-$screen-xl: 1280px !default;
-$screen-xxl: 1440px !default;
+$skl-screen-xs: 480px !default;
+$skl-screen-sm: 600px !default;
+$skl-screen-md: 840px !default;
+$skl-screen-lg: 960px !default;
+$skl-screen-xl: 1280px !default;
+$skl-screen-xxl: 1440px !default;
 
-$screen-sizes: (
-    xs: $screen-xs,
-    sm: $screen-sm,
-    md: $screen-md,
-    lg: $screen-lg,
-    xl: $screen-xl,
-    xxl: $screen-xxl
+$skl-screen-sizes: (
+    xs: $skl-screen-xs,
+    sm: $skl-screen-sm,
+    md: $skl-screen-md,
+    lg: $skl-screen-lg,
+    xl: $skl-screen-xl,
+    xxl: $skl-screen-xxl
 ) !default;

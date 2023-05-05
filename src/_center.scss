@@ -4,23 +4,28 @@
  *  - `content-centered`: Centers its nested element within the `center` element.
  * 
  * In CSS to center a div, it must have a width.
- * In the case here, the width is calculated using the --line-length property, 
- * which corresponds to the maximum width in `ch`that some content can take.
+ * In the case here, the width is calculated using the --line-length property.
  */
- @include component('center') {
+ @include sklComponent('center') {
     display: block;
 
     box-sizing: content-box;
-    margin: auto;
+
+    /* ↓ Only affect horizontal margins */
+    margin-left: auto;
+    margin-right: auto;
+    
     margin-inline: auto;
-    max-inline-size: var(--#{$skl-prefix}line-length);
+    max-inline-size: sklGetVar('line-length');
 
     // Ensure a minimum size on smaller screens, where the margins do not appear.
-    padding-left: var(--#{$skl-prefix}unit-1);
-    padding-right: var(--#{$skl-prefix}unit-1);
+    padding-left: sklGetVar('unit-1');
+    padding-right: sklGetVar('unit-1');
+
+    max-width: sklGetVar('line-length');
 }
 
-@include modifier('center', 'content-centered') {
+@include sklModifier('center', 'content-centered') {
     display: flex;
     flex-direction: column;
     align-items: center;

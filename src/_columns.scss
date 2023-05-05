@@ -4,38 +4,37 @@
  *     It does not wrap the elements, and maintains the column structure.
  *     For a wrapping behaviour, see the Switcher component.
  **/
-@include component('columns') {
+@include sklComponent('columns') {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
 }
 
-@include justifyModifier('columns');
-@include alignModifier('columns');
-@include gapModifier('columns');
+@include sklAlignModifier('columns');
+@include sklJustifyModifier('columns');
+@include sklGapModifier('columns');
+@include sklPaddingModifier('columns');
 
 /**
- * This class allows expanding all the children.
+ * This class allows expanding all the children in a column.
  */
-@include modifier('columns', expand){
-    & >* {
+@include sklModifier('columns', expanded){
+    & > * {
         flex-grow: 1;
     }
 }
 
 /**
- * Represents elements that are nested inside a columns component.
+ * Is a component nested inside a columns component.
  */
-@include component('col') {}
-@include flexBasisModifier('col');
-@include modifier('col', 'no-shrink');
-@include modifier('col', 'no-shrink');
+@include sklComponent('col') {}
+@include sklFlexBasisModifier('col');
 
 /**
  * This component allows defining a div as being an empty space 
- * that pushes the rest of the columns to the end of the columns.
+ * that pushes the rest of the columns to the end of the remaining space.
  */
-@include modifier('col', 'split') {
+@include sklModifier('col', 'split') {
     flex-grow: 1;
 
     &+* {

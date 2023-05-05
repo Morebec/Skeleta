@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skeleta</title>
+    <link rel="stylesheet" type="text/css" href="../dist/docs.min.css">
+</head>
+<body>
+<skl-center>
+    <skl-stack class="gap3">
+        <section id="columns">
+            <h2>Columns</h2>
+            <p>
+                The Columns is a container that displays its elements horizontally and which allows spacing them evenly on the x axis.
+                The columns container will shrink the elements' widths as much as they allow it to make them fit, 
+                until it no longer can and will overflow.
+                The columns is an interresting one as it is non-responsive by design. 
+                It allows some advanced use cases where you'd want to show more or less of the content
+                depending on the width of the screen. For instance, some hero layouts having a call out in one columns
+                and an image or media in another one rely on this very feature to allow hiding the image or showing less 
+                of it depending on the screen width.
+            </p>
+            <skl-columns class="example">
+                <skl-columns class="gap0"> 
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-columns>
+            </skl-columns>
+
+            <h3>Columns justification</h3>
+            <p>
+                The columns supports the <code>columns--justify</code>  modifier wich allows specifying
+                where should the elements be justified.
+                <br>
+                The following example shows the <code>columns--justify-center</code> modifier.
+            </p>
+            <div class="example">
+                <skl-columns class="gap0 justify-center">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-columns>
+            </div> <!-- justification -->
+        </section> <!-- columns -->
+
+
+
+        <section id="cluster">
+            <h2>Cluster</h2>
+            <p>
+                The Cluster is a container that displays its elements horizontally and which allows spacing them evenly on the x
+                axis. The cluster container will wrap the elements when they no longer fit on one line horizontally.
+                It can be considered as a columns container with wrapping enabled.
+            </p>
+            <div class="example">
+                <skl-cluster class="gap0">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-cluster>
+            </div>
+
+            <h3>Cluster justification</h3>
+            <p>
+                The cluster supports the <code>cluster--justify</code>  modifier wich allows specifying
+                where should the elements be justified.
+                <br>
+                The following example shows the <code>cluster--justify-end</code> modifier.
+            </p>
+            <div class="example">
+                <skl-cluster class="gap0 justify-end">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-cluster>
+            </div> <!-- justification -->
+        </section> <!-- cluster -->
+
+
+
+        <section id="stack">
+            <h2>Stack</h2>
+            <p>
+                The stack is a container that stacks its elements vertically and which allows spacing them evenly on the y
+                axis. Unless specified otherwise, the stack container will expand the width of its elements to take the full
+                width of the stack container.
+            </p>
+            <div class="example">
+                <skl-stack class="gap0">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-stack>
+            </div>
+        </section> <!-- stack -->
+
+        <section id="switcher">
+            <h2>Switcher</h2>
+            <p>
+                The switcher is a responsive layout that will switch from a columns-like layout to a stack-like layout
+                at a specific "breakpoint", i.e. a point where horizontally the space is considered insufficient to display the
+                elements side by side.
+                By default, if the width of the switcher is half a line-length (120ch) or less it will switch to a stack-like
+                layout.
+            </p>
+            <div class="example">
+                <skl-switcher class="gap0">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-switcher>
+            </div>
+        
+            <h3>Switcher switching points</h3>
+            <p>
+                The switcher supports different breakpoint modifiers based on the <strong>unit scale</strong>, and
+                <strong>rem values</strong> (from 10 to 100 in increments of 5). 
+                By default, if the width of the switcher is half a line-length (120ch) or less
+                it will switch to a stack-like layout.
+                <br>
+                Here are the different classes that can be used, their naming convention follow a mobile-first approach:
+                <ul>
+                    <li>
+                        <strong>Unit scale:</strong>&nbsp;<code>unstack-from-unit{-5..10}</code>
+                    </li>
+                    <li>
+                        <strong><code>rem</code> values:</strong>&nbsp;<code>unstack-from-{10..100 in 5 increments}rem</code>
+                    </li>
+                </ul>
+                The following example shows the <code>unstack-from-45rem</code> modifier which causes
+                move from a stack layout to a columns layout once it has reached a width of 45rem (720px for a 16px font size)
+            </p>
+            <div class="example">
+                <skl-switcher class="gap0 unstack-from-45rem">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-switcher>
+            </div> <!-- justification -->
+        </section> <!-- switcher -->
+
+        <section id="center">
+            <h2>Center</h2>
+            <p>
+                The center is a container that centers itself within its parent horizontally.
+                It also sets its max width to the <code>--line-length</code> CSS custom property.
+            </p>
+            <div class="example">
+                <skl-center>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-center>
+            </div>
+        </section> <!-- center -->
+
+
+        <section id="cover">
+            <h2>Cover</h2>
+            <p>
+                Is a component that allows it to be centered both vertically and horizontally within its parent.
+            </p>
+            <div class="example">
+                <skl-cover>
+                    <h1>Hello Skeleta!</h1>
+                </skl-cover>
+            </div>
+        </section>
+
+    </skl-stack>
+</skl-center>
+</body>
+</html>

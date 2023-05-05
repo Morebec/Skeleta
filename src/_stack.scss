@@ -4,7 +4,7 @@
  *  - `gap`: adds spacing between nested elements.
  *  - `justify`: adds
  */
-@include component('stack') {
+@include sklComponent('stack') {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -14,10 +14,11 @@
     }    
 }
 
-@include gapModifier('stack');
-@include justifyModifier('stack');
+@include sklGapModifier('stack');
+@include sklJustifyModifier('stack');
+@include sklPaddingModifier('stack');
 
 // SPLIT
-@include component('stack__split') {
+@include sklComponent('stack__split') {
     margin-top: auto;
 }

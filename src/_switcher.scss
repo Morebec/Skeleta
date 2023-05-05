@@ -1,35 +1,51 @@
 /**
- * The switcher lays out its nested elements side by side and wraps them when 
- * they overflow. As opposed to the Cluster, when they wrap they will take the 
- * full space available horizontally.
+ * The switcher is a responsive layout that will switch from a columns-like layout to a stack-like layout
+ * at a specific "breakpoint". I.e. a point where horizontally the space is considered insufficient to display the 
+ * elements side by side.
+ *
+ * The implementation below is based off Heydon Pickering's Holy Albtros 
+ * (https: //heydonworks.com/article/the-flexbox-holy-albatross-reincarnated/).
+ * It essentially leverages flex box's algorithm to achieve its goal.
+ * Essentially it works by trying to make flex-basis use a dynamic value.
+ * When flex-basis < 0, then the value of min-width takes effect for the element.
+ * When flex-basis > 0, then the value of max-width takes effect for the element.
+ * By making the value of flex-basis change dynamically based on a given breakpoint,
+ * This value will change wrapping or not the elements.
+ * To make this component reusable, the breakpoint is calculated based on the switcher's width.
  **/
- @include component('switcher') {
+ @include sklComponent('switcher') {
+    // https: //www.bram.us/2019/09/24/flexbox-albatross-with-grids/
+    // display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(min(calc(40rem * 999 - 100% * 999), 100%), 1fr));
     display: flex;
     flex-wrap: wrap;
 
     align-items: flex-start;
-
-
-    // SPLIT
-    .#{$skl-prefix}switcher__split {
-        &+* {
-            margin-left: auto;
-        }
-
+    
+    & > * {
         flex-grow: 1;
+        flex-basis: calc((sklGetVar(line-length) * 0.5 - 100%) * 999);
     }
 }
 
-@include justifyModifier('switcher');
-@include alignModifier('switcher');
-@include gapModifier('switcher');
+@include sklGapModifier('switcher');
+@include sklPaddingModifier('switcher');
 
-/**
- * This modifier allows expanding all the nested elements of the switcher.
- */
-@include modifier('switcher', expand) { 
-    & > * {
-        flex-grow: 1;
-        height: 100%;
+// unstack from unit.
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+    @include sklModifier('switcher', unstack-from-unit#{$i}) {
+        & > * {
+            flex-basis: calc((sklGetVar(unit#{$i}) - 100%) * 999);
+        }
+    }
+}
+
+// unstack from rem.
+@for $i from 1 through 18 {
+    $value: $i * 5 + 10;
+    @include sklModifier('switcher', unstack-from-#{$value}rem) {
+        & > * {
+            flex-basis: calc((#{$value}rem - 100%) * 999);
+        }
     }
 }

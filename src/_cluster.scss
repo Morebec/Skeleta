@@ -6,11 +6,12 @@
  * Responsiveness:
  *     Wraps elements vertically.
  */
-@include component('cluster') {
+@include sklComponent('cluster') {
     display: flex;
     flex-wrap: wrap;
-
-   
 }
-@include gapModifier('cluster');
-@include justifyModifier('cluster');
+
+@include sklGapModifier('cluster');
+@include sklJustifyModifier('cluster');
+@include sklPaddingModifier('cluster');
+@include sklAlignModifier('cluster');

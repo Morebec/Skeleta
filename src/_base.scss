@@ -55,3 +55,8 @@ main,
 footer {
     max-inline-size: none;
 }
+
+// Make images responsive by default.
+img, svg {
+    max-width: 100%;
+}

@@ -8,10 +8,23 @@
     <link rel="stylesheet" type="text/css" href="../dist/docs.min.css">
 </head>
 <body>
-
-    <div class="box">
-        hello
-    </div>
+<skl-sidebar class="gap0">
+<div class="card padding0" style="min-width: 300px;">
+    <skl-stack id="menu">
+        <h1>Skeleta</h1>
+        <ul>
+            <li><a href="#columns">Columns</a></li>
+            <li><a href="#cluster">Cluster</a></li>
+            <li><a href="#stack">Stack</a></li>
+            <li><a href="#switcher">Switcher</a></li>
+            <li><a href="#sidebar">Sidebar</a></li>
+            <li><a href="#center">Center</a></li>
+            <li><a href="#viewport">Viewport</a></li>
+            <li><a href="#frame">Frame</a></li>
+        </ul>
+    </skl-stack>
+    <div></div>
+</div>
 <skl-center-h>
     <skl-stack class="gap3">
         <section id="columns">
@@ -171,7 +184,7 @@
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>
                         <div>
-                            <button class="button button--primary">...</button>
+                            <button class="button button--secondary">...</button>
                         </div>
                     </div>
                     </skl-col>
@@ -313,7 +326,7 @@
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>
                         <div>
-                            <button class="button button--primary">...</button>
+                            <button class="button button--secondary">...</button>
                         </div>
                     </div>
                     <div class="card">
@@ -358,7 +371,7 @@
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>
                         <div>
-                            <button class="button button--primary">...</button>
+                            <button class="button button--secondary">...</button>
                         </div>
                     </div>
                     <div class="card">
@@ -371,6 +384,36 @@
                 </skl-switcher>
             </div> <!-- justification -->
         </section> <!-- switcher -->
+
+
+        <section id="sidebar">
+            <h2>Sidebar</h2>
+            <p>
+                Represents a layout that displays two columns side by side with a shared height, where one is narrower (the sidebar)
+                and another filling up the remaining horizontal space (the main area). When in a narrow environment
+                the two columns stack on top of each other similarly to the Switcher.
+                It is named after the classic sidebar layout that exibits this behaviour.
+                The first element is always considered the sidebar, while the second the width filling one.
+            </p>
+            <div class="example">
+                <skl-sidebar class="gap0">
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--secondary">...</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="text-title">...</div>
+                        <div class="text-paragraph">...</div>
+                        <div>
+                            <button class="button button--primary">...</button>
+                        </div>
+                    </div>
+                </skl-sidebar>
+            </div>
+        </section>
 
         <section id="center">
             <h2>Center</h2>
@@ -395,7 +438,7 @@
                         <div class="text-title">...</div>
                         <div class="text-paragraph">...</div>
                         <div>
-                            <button class="button button--primary">...</button>
+                            <button class="button button--secondary">...</button>
                         </div>
                     </div>
                 </skl-center-v>
@@ -469,5 +512,6 @@
 
     </skl-stack>
 </skl-center>
+</skl-sidebar>
 </body>
 </html>

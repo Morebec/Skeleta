@@ -1,5 +1,7 @@
 $skl-generateStandaloneRules: false;
 
+$skl-fontSize: calc(16px + 0.2vw);
+
 @import "../src/skeleta";
 
 body {
@@ -8,6 +10,7 @@ body {
     padding: var(--unit2);
     line-height: 1.5rem;
     width: 100vw;
+    overflow-x: hidden;
 }
 
 
@@ -39,12 +42,12 @@ body {
 .text-paragraph {
     color: transparent;
     border-radius: sklGetVar(unit0);
-    display: block;
     position: relative;
+    display: flex;
 
     height: calc(sklGetVar(unit0) * 3);
     
-    display: flex;
+
 
     &:before, &:after {
         position: absolute;
@@ -119,4 +122,9 @@ code {
 
 #frame skl-frame {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+#menu {
+    position: sticky;
+    top: 0;
 }

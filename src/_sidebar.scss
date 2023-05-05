@@ -1,0 +1,25 @@
+/**
+ * Represents a layout that displays two columns side by side with a shared height, where one is narrower (the sidebar)
+ * and another  filling up the remaining horizontal space (the main area). When in a narrow environment
+ * the two columns stack on top of each other similarly to the Switcher.
+ * It is named after the classic sidebar layout that exibits this behaviour.
+ * The first element is always considered the sidebar, while the second the width filling one.
+ */
+@include sklComponent(sidebar) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: stretch;
+
+    & > :first-child {
+        flex-grow: 1;
+    }
+
+    & > :last-child {
+        flex-basis: 0;
+        flex-grow: 999;
+        min-width: 50%;
+    }
+}
+@include sklGapModifier(sidebar);
+@include sklPaddingModifier(sidebar);

@@ -6,12 +6,21 @@
  * Responsiveness:
  *     Wraps elements vertically.
  */
-@include sklComponent('cluster') {
+@include sklComponent(cluster) {
     display: flex;
     flex-wrap: wrap;
 }
 
-@include sklGapModifier('cluster');
-@include sklJustifyModifier('cluster');
-@include sklPaddingModifier('cluster');
-@include sklAlignModifier('cluster');
+/**
+ * This class allows expanding all the children in a column.
+ */
+@include sklModifier(cluster, expanded) {
+    &>* {
+        flex-grow: 1;
+    }
+}
+
+@include sklGapModifier(cluster);
+@include sklJustifyModifier(cluster);
+@include sklPaddingModifier(cluster);
+@include sklAlignModifier(cluster);

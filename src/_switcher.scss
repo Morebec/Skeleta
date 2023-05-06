@@ -44,7 +44,7 @@
 // unstack from rem.
 @for $i from 1 through 18 {
     $value: $i * 5 + 10;
-    @include sklModifier(switcher, unstack-from-#{$value}rem) {
+    @include sklModifier(switcher, unstack-from#{$value}rem) {
         & > * {
             flex-basis: calc((#{$value}rem - 100%) * 999);
         }

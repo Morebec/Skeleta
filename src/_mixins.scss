@@ -197,7 +197,7 @@
 @mixin sklAlignModifier($componentName) {
     @each $i in 'stretch', 'start', 'end', 'center' {
         @include sklModifier($componentName, align-#{$i}) {
-            align-content: #{$i};
+            align-items: #{$i};
         }
     }
 }

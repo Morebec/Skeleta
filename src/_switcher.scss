@@ -13,7 +13,7 @@
  * This value will change wrapping or not the elements.
  * To make this component reusable, the breakpoint is calculated based on the switcher's width.
  **/
- @include sklComponent('switcher') {
+ @include sklComponent(switcher) {
     // https: //www.bram.us/2019/09/24/flexbox-albatross-with-grids/
     // display: grid;
     // grid-template-columns: repeat(auto-fit, minmax(min(calc(40rem * 999 - 100% * 999), 100%), 1fr));
@@ -28,12 +28,13 @@
     }
 }
 
-@include sklGapModifier('switcher');
-@include sklPaddingModifier('switcher');
+@include sklAlignModifier(switcher);
+@include sklGapModifier(switcher);
+@include sklPaddingModifier(switcher);
 
 // unstack from unit.
 @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
-    @include sklModifier('switcher', unstack-from-unit#{$i}) {
+    @include sklModifier(switcher, unstack-from-unit#{$i}) {
         & > * {
             flex-basis: calc((sklGetVar(unit#{$i}) - 100%) * 999);
         }
@@ -43,7 +44,7 @@
 // unstack from rem.
 @for $i from 1 through 18 {
     $value: $i * 5 + 10;
-    @include sklModifier('switcher', unstack-from-#{$value}rem) {
+    @include sklModifier(switcher, unstack-from-#{$value}rem) {
         & > * {
             flex-basis: calc((#{$value}rem - 100%) * 999);
         }

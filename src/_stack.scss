@@ -18,11 +18,15 @@
 @include sklJustifyModifier(stack);
 @include sklPaddingModifier(stack);
 
+/**
+ * This component can be nested inside a stack in order to allow 
+ * modifying how a stack handles specific elements.
+ */
 @include sklComponent(stacked) {}
 
 /**
- * This component allows defining a div as being an empty space 
- * that pushes the rest of the columns to the end of the remaining space.
+ * This component allows defining a stacked element as being a point at which
+ * the following elements should pushed to the end of the available space.
  */
 @include sklModifier(stacked, split) {
     margin-inline-start: auto;

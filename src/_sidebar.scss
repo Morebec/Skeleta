@@ -23,3 +23,8 @@
 }
 @include sklGapModifier(sidebar);
 @include sklPaddingModifier(sidebar);
+
+@include sklModifier(sidebar, "reverse") {
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+}

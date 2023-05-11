@@ -1,0 +1,40 @@
+
+/**
+ * The box is the simplest of all components, it simply wraps it nested elements
+ * and exposes classes to add padding.
+ */
+@include sklComponent(box) {
+
+}
+
+@include sklPaddingModifier(box);
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+    @include sklModifier(switcher, min-width#{$i}) {
+        &>* {
+            min-width: calc((sklGetVar(unit#{$i}) - 100%) * 999);
+        }
+    }
+}
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+    @include sklModifier(switcher, min-height#{$i}) {
+        &>* {
+            min-height: calc((sklGetVar(unit#{$i}) - 100%) * 999);
+        }
+    }
+}
+
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+    @include sklModifier(switcher, max-width#{$i}) {
+        &>* {
+            max-width: calc((sklGetVar(unit#{$i}) - 100%) * 999);
+        }
+    }
+}
+
+@for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {
+    @include sklModifier(switcher, max-height#{$i}) {
+        &>* {
+            max-height: calc((sklGetVar(unit#{$i}) - 100%) * 999);
+        }
+    }
+}

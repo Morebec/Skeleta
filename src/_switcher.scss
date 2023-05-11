@@ -31,6 +31,7 @@
 @include sklAlignModifier(switcher);
 @include sklGapModifier(switcher);
 @include sklPaddingModifier(switcher);
+@include sklWrapModifier(switcher);
 
 // unstack from unit.
 @for $i from $skl-minUnitScaleValue through $skl-maxUnitScaleValue {

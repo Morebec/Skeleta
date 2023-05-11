@@ -203,6 +203,18 @@
 }
 
 /**
+ * Defines a modifier for the flex "wrap" property for a given component.
+ */
+@mixin sklWrapModifier($componentName) {
+
+    @each $i in 'wrap', 'wrap-reverse', 'nowrap' {
+        @include sklModifier($componentName, wrap-#{$i}) {
+            wrap: #{$i};
+        }
+    }
+}
+
+/**
  * Defines a modifier for the "flex-basis" property for a given component using fractions.
  * E.g.:
  * @include sklFlexBasisModifier('col', 3);

@@ -209,7 +209,7 @@
 
     @each $i in 'wrap', 'wrap-reverse', 'nowrap' {
         @include sklModifier($componentName, wrap-#{$i}) {
-            wrap: #{$i};
+            flex-wrap: #{$i};
         }
     }
 }
